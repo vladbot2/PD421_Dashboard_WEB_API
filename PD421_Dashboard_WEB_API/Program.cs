@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using PD421_Dashboard_WEB_API.DAL;
 using PD421_Dashboard_WEB_API.DAL.Entitites.Identity;
+using PD421_Dashboard_WEB_API.DAL.Repositories.Game;
+using PD421_Dashboard_WEB_API.DAL.Repositories.Genre;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -31,6 +33,10 @@ builder.Services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
 })
     .AddEntityFrameworkStores<AppDbContext>()
     .AddDefaultTokenProviders();
+
+// Add repositories
+builder.Services.AddScoped<IGameRepository, GameRepository>();
+builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 
 var app = builder.Build();
 
