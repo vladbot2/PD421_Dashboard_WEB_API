@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using PD421_Dashboard_WEB_API.BLL.Services.Genre;
 using PD421_Dashboard_WEB_API.DAL;
 using PD421_Dashboard_WEB_API.DAL.Entitites.Identity;
+using PD421_Dashboard_WEB_API.DAL.Initializer;
 using PD421_Dashboard_WEB_API.DAL.Repositories.Game;
 using PD421_Dashboard_WEB_API.DAL.Repositories.Genre;
 
@@ -56,5 +57,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.Seed();
 
 app.Run();
