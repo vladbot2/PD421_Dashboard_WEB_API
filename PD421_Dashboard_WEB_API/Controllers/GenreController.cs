@@ -42,22 +42,18 @@ namespace PD421_Dashboard_WEB_API.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetById(string? id)
+        public async Task<IActionResult> GetAsync(string? id)
         {
             if (string.IsNullOrEmpty(id))
             {
-                return BadRequest("Id не вказано");
+                var response = await _genreService.GetAllAsync();
+                return Ok(response);
             }
-
-            var response = await _genreService.GetByIdAsync(id);
-            return Ok(response);
-        }
-
-        [HttpGet("list")]
-        public async Task<IActionResult> GetAllAsync()
-        {
-            var response = await _genreService.GetAllAsync();
-            return Ok(response);
+            else
+            {
+                var response = await _genreService.GetByIdAsync(id);
+                return Ok(response);
+            }
         }
     }
 }

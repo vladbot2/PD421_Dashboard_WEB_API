@@ -4,9 +4,9 @@ namespace PD421_Dashboard_WEB_API.BLL.Dtos.Genre
 {
     public class UpdateGenreDto // PUT
     {
-        [Required]
+        [Required(ErrorMessage = "Поле Id є обов'язковим")]
         public required string Id { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Поле Name є обов'язковим")]
         public required string Name { get; set; }
     }
 }
