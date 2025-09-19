@@ -2,7 +2,7 @@
 
 namespace PD421_Dashboard_WEB_API.DAL.Repositories
 {
-    public interface IGenericRpository<TEntity, TId>
+    public interface IGenericRepository<TEntity, TId>
         where TEntity : class, IBaseEntity<TId>
         where TId : notnull
     {

@@ -3,7 +3,7 @@ using PD421_Dashboard_WEB_API.DAL.Entitites;
 
 namespace PD421_Dashboard_WEB_API.DAL.Repositories
 {
-    public class GenericRepository<TEntity, TId> : IGenericRpository<TEntity, TId>
+    public class GenericRepository<TEntity, TId> : IGenericRepository<TEntity, TId>
         where TEntity : class, IBaseEntity<TId>
         where TId : notnull
     {
