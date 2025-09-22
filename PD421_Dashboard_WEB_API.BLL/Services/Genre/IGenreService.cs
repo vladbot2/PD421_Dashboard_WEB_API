@@ -4,10 +4,10 @@ namespace PD421_Dashboard_WEB_API.BLL.Services.Genre
 {
     public interface IGenreService
     {
-        Task<string> CreateAsync(CreateGenreDto dto);
-        Task<string> UpdateAsync(UpdateGenreDto dto);
-        Task<string> DeleteAsync(string id);
-        Task<GenreDto?> GetByIdAsync(string id);
-        Task<IEnumerable<GenreDto>> GetAllAsync();
+        Task<ServiceResponse> CreateAsync(CreateGenreDto dto);
+        Task<ServiceResponse> UpdateAsync(UpdateGenreDto dto);
+        Task<ServiceResponse> DeleteAsync(string id);
+        Task<ServiceResponse> GetByIdAsync(string id);
+        Task<ServiceResponse> GetAllAsync();
     }
 }

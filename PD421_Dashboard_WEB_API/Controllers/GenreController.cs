@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using PD421_Dashboard_WEB_API.BLL.Dtos.Genre;
+using PD421_Dashboard_WEB_API.BLL.Services;
 using PD421_Dashboard_WEB_API.BLL.Services.Genre;
+using PD421_Dashboard_WEB_API.Extensions;
+using System.Net;
 
 namespace PD421_Dashboard_WEB_API.Controllers
 {
@@ -19,14 +22,14 @@ namespace PD421_Dashboard_WEB_API.Controllers
         public async Task<IActionResult> CreateAsync([FromBody] CreateGenreDto dto)
         {
             var response = await _genreService.CreateAsync(dto);
-            return Ok(response);
+            return this.ToActionResult(response);
         }
 
         [HttpPut]
         public async Task<IActionResult> UpdateAsync([FromBody] UpdateGenreDto dto)
         {
             var response = await _genreService.UpdateAsync(dto);
-            return Ok(response);
+            return this.ToActionResult(response);
         }
 
         [HttpDelete]
@@ -34,11 +37,17 @@ namespace PD421_Dashboard_WEB_API.Controllers
         {
             if (string.IsNullOrEmpty(id))
             {
-                return BadRequest("Id не вказано");
+                var validResponse = new ServiceResponse
+                {
+                    Message = "Id не вказано",
+                    IsSuccess = false,
+                    HttpStatusCode = HttpStatusCode.BadRequest
+                };
+                return this.ToActionResult(validResponse);
             }
 
             var response = await _genreService.DeleteAsync(id);
-            return Ok(response);
+            return this.ToActionResult(response);
         }
 
         [HttpGet]
@@ -47,12 +56,12 @@ namespace PD421_Dashboard_WEB_API.Controllers
             if (string.IsNullOrEmpty(id))
             {
                 var response = await _genreService.GetAllAsync();
-                return Ok(response);
+                return this.ToActionResult(response);
             }
             else
             {
                 var response = await _genreService.GetByIdAsync(id);
-                return Ok(response);
+                return this.ToActionResult(response);
             }
         }
     }
