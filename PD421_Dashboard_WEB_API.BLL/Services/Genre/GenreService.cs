@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using PD421_Dashboard_WEB_API.BLL.Dtos.Genre;
 using PD421_Dashboard_WEB_API.DAL.Entitites;
 using PD421_Dashboard_WEB_API.DAL.Repositories.Genre;
@@ -9,10 +10,12 @@ namespace PD421_Dashboard_WEB_API.BLL.Services.Genre
     public class GenreService : IGenreService
     {
         private readonly IGenreRepository _genreRepository;
+        private readonly IMapper _mapper;
 
-        public GenreService(IGenreRepository genreRepository)
+        public GenreService(IGenreRepository genreRepository, IMapper mapper)
         {
             _genreRepository = genreRepository;
+            _mapper = mapper;
         }
 
         public async Task<ServiceResponse> CreateAsync(CreateGenreDto dto)
@@ -132,8 +135,8 @@ namespace PD421_Dashboard_WEB_API.BLL.Services.Genre
                 };
             }
 
-            entity.Name = dto.Name;
-            entity.NormalizedName = dto.Name.ToUpper();
+            // dto -> entity
+            entity = _mapper.Map(dto, entity);
 
             await _genreRepository.UpdateAsync(entity);
 
