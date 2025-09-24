@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using PD421_Dashboard_WEB_API.BLL.Services.Auth;
 using PD421_Dashboard_WEB_API.BLL.Services.Genre;
+using PD421_Dashboard_WEB_API.BLL.Settings;
 using PD421_Dashboard_WEB_API.DAL;
 using PD421_Dashboard_WEB_API.DAL.Entitites.Identity;
 using PD421_Dashboard_WEB_API.DAL.Initializer;
@@ -48,6 +51,10 @@ builder.Services.AddScoped<IGenreRepository, GenreRepository>();
 
 // Add services
 builder.Services.AddScoped<IGenreService, GenreService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+
+// Add settings
+builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
 var app = builder.Build();
 
