@@ -30,11 +30,8 @@ namespace PD421_Dashboard_WEB_API.BLL.Services.Genre
                 };
             }
 
-            var entity = new GenreEntity
-            {
-                Name = dto.Name,
-                NormalizedName = dto.Name.ToUpper()
-            };
+            // CreateGenreDto -> GenreEntity
+            var entity = _mapper.Map<GenreEntity>(dto);
 
             await _genreRepository.CreateAsync(entity);
 
@@ -71,11 +68,7 @@ namespace PD421_Dashboard_WEB_API.BLL.Services.Genre
         {
             var entities = await _genreRepository.GetAll().ToListAsync();
 
-            var dtos = entities.Select(e => new GenreDto
-            {
-                Id = e.Id,
-                Name = e.Name
-            });
+            var dtos = _mapper.Map<List<GenreDto>>(entities);
 
             return new ServiceResponse
             {
@@ -98,11 +91,7 @@ namespace PD421_Dashboard_WEB_API.BLL.Services.Genre
                 };
             }
 
-            var dto = new GenreDto
-            {
-                Id = entity.Id,
-                Name = entity.Name
-            };
+            var dto = _mapper.Map<GenreDto>(entity);
 
             return new ServiceResponse
             {

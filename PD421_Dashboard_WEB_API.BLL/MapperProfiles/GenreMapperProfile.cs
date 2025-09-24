@@ -12,6 +12,14 @@ namespace PD421_Dashboard_WEB_API.BLL.MapperProfiles
             CreateMap<UpdateGenreDto, GenreEntity>()
                 .ForMember(dest => dest.NormalizedName, 
                 opt => opt.MapFrom(src => src.Name.ToUpper()));
+
+            // CreateGenreDto -> GenreEntity
+            CreateMap<CreateGenreDto, GenreEntity>()
+                .ForMember(dest => dest.NormalizedName,
+                opt => opt.MapFrom(src => src.Name.ToUpper()));
+
+            // GenreEntity -> GenreDto
+            CreateMap<GenreEntity, GenreDto>();
         }
     }
 }
