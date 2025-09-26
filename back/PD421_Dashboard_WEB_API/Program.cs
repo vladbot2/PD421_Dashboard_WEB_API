@@ -56,6 +56,20 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 // Add settings
 builder.Services.Configure<JwtSettings>(builder.Configuration.GetSection("JwtSettings"));
 
+// CORS
+string corsName = "CorsAll";
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(corsName, builder =>
+    {
+        builder
+        .AllowAnyOrigin()
+        .AllowAnyMethod()
+        .AllowAnyHeader();
+    });
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -70,6 +84,8 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseCors(corsName);
 
 app.Seed();
 

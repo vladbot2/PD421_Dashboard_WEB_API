@@ -28,6 +28,7 @@ namespace PD421_Dashboard_WEB_API.BLL.Services.Auth
         {
             var claims = new List<Claim>
             {
+                new Claim("id", user.Id!),
                 new Claim(JwtRegisteredClaimNames.Email, user.Email!),
                 new Claim(JwtRegisteredClaimNames.Name, user.UserName!),
                 new Claim(JwtRegisteredClaimNames.Picture, user.Image ?? string.Empty),
